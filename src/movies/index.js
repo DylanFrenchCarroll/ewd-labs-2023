@@ -1,5 +1,5 @@
 import express from 'express';
-import {movies, movieReviews, movieDetails} from './moviesData.js';
+import {movies, movieReviews, movieDetails, genres} from './moviesData.js';
 import uniqid from 'uniqid'
 
 
@@ -52,6 +52,20 @@ router.post('/:id/reviews', (req, res) => {
     }
 });
 
+
+// Get movie genres
+router.get('/:id/genres', (req, res) => {
+    const id = parseInt(req.params.id);
+    // find reviews in list
+    if (genres.id == id) {
+        res.status(200).json(movieReviews);
+    } else {
+        res.status(404).json({
+            message: 'The resource you requested could not be found.',
+            status_code: 404
+        });
+    }
+}); 
 
 
 
