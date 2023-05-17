@@ -25,10 +25,18 @@ export default (dependencies) => {
         response.status(200).json(accounts);
     };
 
+    const updateAccount = async (request, response, next) => {
+        // Input
+        const id = request.params.id;
+        const { firstName, lastName, email, password } = request.body;
+        const account = await accountService.updateAccount(id, firstName, lastName, email, password, dependencies)
+        response.status(201).json(account)
+    };
 
     return {
         createAccount,
         getAccount,
-        listAccounts
+        listAccounts,
+        updateAccount
     };
 };
