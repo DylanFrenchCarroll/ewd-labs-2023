@@ -1,9 +1,13 @@
+/* eslint-disable no-undef */
 import AccountsRepositoryInMemory from '../accounts/repositories/InMemoryRepository.js';
 import AccountsRepositoryMongo from '../accounts/repositories/MongoAccountRepository.js';
+import AccountSchema from '../accounts/validators/index.js';
 
 const buildDependencies = () => {
   const dependencies = {
   };
+
+  dependencies.accountSchema = AccountSchema;
 
   if (process.env.DATABASE_DIALECT === "in-memory") {
     dependencies.accountsRepository = new AccountsRepositoryInMemory();

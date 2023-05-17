@@ -4,6 +4,7 @@ import createAccountsRouter from './src/accounts/routes/index.js';
 import buildDependencies from "./src/config/dependencies.js";
 import createMoviesRouter from './src/movies/routes/index.js';
 import db from './src/config/db.js';
+import errorHandler from './src/utils/ErrorHandler.js';
 
 dotenv.config();
 db.init();
@@ -13,6 +14,7 @@ const app = express();
 const port = process.env.PORT;
 const dependencies = buildDependencies();
 
+app.use(errorHandler);
 app.use(express.json());
 
 app.use('/api/accounts', createAccountsRouter(dependencies));

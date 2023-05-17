@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import accountService from "../services/index.js";
 
 export default (dependencies) => {
