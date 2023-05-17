@@ -3,10 +3,13 @@ import express from 'express';
 import createAccountsRouter from './src/accounts/routes/index.js';
 import buildDependencies from "./src/config/dependencies.js";
 import createMoviesRouter from './src/movies/routes/index.js';
+import db from './src/config/db.js';
 
 dotenv.config();
+db.init();
 
 const app = express();
+// eslint-disable-next-line no-undef
 const port = process.env.PORT;
 const dependencies = buildDependencies();
 
