@@ -12,6 +12,7 @@ const createMoviesRouter = (dependencies) => {
     router.route('/')
         .get(moviesController.find);
 
+
     return router;
 };
 export default createMoviesRouter;

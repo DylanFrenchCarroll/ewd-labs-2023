@@ -3,6 +3,7 @@ import moviesService from "./../services/index.js";
 export default (dependencies) => {
 
     const getMovie = async (request, response, next) => {
+        console.log("TESTER")
         //input
         const movieId = request.params.id;
         // Treatment
@@ -11,6 +12,7 @@ export default (dependencies) => {
         response.status(200).json(movie);
     };
     const find = async (request, response, next) => {
+        console.log("TES222TER")
         //input
         const query = request.query;
         // Treatment
@@ -18,9 +20,14 @@ export default (dependencies) => {
         //output
         response.status(200).json(movies);
     };
+    const getUpcomingMovies = async (request, response, next) => {
+        const movies = await moviesService.findUpcoming(dependencies)
+        response.status(200).json(movies.results)
+    };
 
     return {
         getMovie,
-        find
+        find,
+        getUpcomingMovies
     };
 };
