@@ -1,15 +1,15 @@
 import Account from '../entities/Account.js';
 
 export default {
-  authenticate: async (email, password, {accountsRepository, authenticator}) => {
+  authenticate: async (email, password, { accountsRepository, authenticator, tokenManager }) => {
     const account = await accountsRepository.getByEmail(email);
     const result = await authenticator.compare(password, account.password);
     if (!result) {
-        throw new Error('Bad credentials');
+      throw new Error('Bad credentials');
     }
-    const token = JSON.stringify({ email: account.email });//JUST Temporary!!! TODO: make it better
+    const token = tokenManager.generate({ email: account.email });
     return token;
-},
+  },
 getFavourites: async (accountId, { accountsRepository }) => {
   const account = await accountsRepository.get(accountId);
   return account.favourites;
