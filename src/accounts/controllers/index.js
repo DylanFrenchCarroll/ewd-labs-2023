@@ -13,6 +13,28 @@ export default (dependencies) => {
         }
     };
 
+    const addFavourite = async (request, response, next) => {
+        try {
+            const { movieId } = request.body;
+            console.log("Movie ID: " + movieId);
+            const id = request.params.id;
+            console.log("ID: " + id);
+            const account = await accountService.addFavourite(id, movieId, dependencies);
+            response.status(200).json(account);
+        } catch (err) {
+            next(new Error(`Invalid Data ${err.message}`));
+        }
+    };
+    const getFavourites = async (request, response, next) => {
+        try {
+            const id = request.params.id;
+            const favourites = await accountService.getFavourites(id, dependencies);
+            response.status(200).json(favourites);
+        } catch (err) {
+            next(new Error(`Invalid Data ${err.message}`));
+        }
+    };
+
     const createAccount = async (request, response, next) => {
         // Input
         const { firstName, lastName, email, password } = request.body;
@@ -49,6 +71,8 @@ export default (dependencies) => {
         getAccount,
         listAccounts,
         updateAccount,
-        authenticateAccount
+        authenticateAccount,
+        addFavourite,
+        getFavourites
     };
 };

@@ -10,6 +10,18 @@ export default {
     const token = JSON.stringify({ email: account.email });//JUST Temporary!!! TODO: make it better
     return token;
 },
+getFavourites: async (accountId, { accountsRepository }) => {
+  const account = await accountsRepository.get(accountId);
+  return account.favourites;
+},
+addFavourite: async (accountId, movieId, { accountsRepository }) => {
+  console.log("Account: " + account);
+  const account = await accountsRepository.get(accountId);
+  console.log("Account: " + account);
+  account.favourites.push(movieId);
+  return await accountsRepository.merge(account);
+
+},
   registerAccount: async  (firstName, lastName, email, password, {accountsRepository}) => {
     const account = new Account(undefined, firstName, lastName, email, password);
     return accountsRepository.persist(account);
