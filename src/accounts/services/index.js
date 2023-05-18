@@ -15,9 +15,7 @@ getFavourites: async (accountId, { accountsRepository }) => {
   return account.favourites;
 },
 addFavourite: async (accountId, movieId, { accountsRepository }) => {
-  console.log("Account: " + account);
   const account = await accountsRepository.get(accountId);
-  console.log("Account: " + account);
   account.favourites.push(movieId);
   return await accountsRepository.merge(account);
 

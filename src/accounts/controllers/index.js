@@ -16,9 +16,7 @@ export default (dependencies) => {
     const addFavourite = async (request, response, next) => {
         try {
             const { movieId } = request.body;
-            console.log("Movie ID: " + movieId);
             const id = request.params.id;
-            console.log("ID: " + id);
             const account = await accountService.addFavourite(id, movieId, dependencies);
             response.status(200).json(account);
         } catch (err) {
