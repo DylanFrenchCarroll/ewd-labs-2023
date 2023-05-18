@@ -24,7 +24,8 @@ addFavourite: async (accountId, movieId, { accountsRepository }) => {
     return new Error(`Duplicate Favourite ${movieId}`);
   }
 },
-  registerAccount: async  (firstName, lastName, email, password, {accountsRepository}) => {
+  registerAccount: async  (firstName, lastName, email, password, {accountsRepository, authenticator}) => {
+    password = await authenticator.encrypt(password);
     const account = new Account(undefined, firstName, lastName, email, password);
     return accountsRepository.persist(account);
   },
@@ -39,6 +40,6 @@ addFavourite: async (accountId, movieId, { accountsRepository }) => {
   },
   updateAccount: (id, firstName, lastName, email, password, {accountsRepository})=>{
     const account = new Account(id, firstName, lastName, email, password);
-    return accountsRepository.merge(account)
+    return accountsRepository.merge(account);
    }
 };

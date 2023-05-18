@@ -45,7 +45,7 @@ export default (dependencies) => {
         // Treatment
         const account = await accountService.registerAccount(firstName, lastName, email, password, dependencies);
         //output
-        response.status(201).json(account)
+        response.status(201).json(account);
     };
     const getAccount = async (request, response, next) => {
         //input
@@ -66,7 +66,7 @@ export default (dependencies) => {
         // Input
         const id = request.params.id;
         const { firstName, lastName, email, password } = request.body;
-        const account = await accountService.updateAccount(id, firstName, lastName, email, password, dependencies)
+        const account = await accountService.updateAccount(id, firstName, lastName, email, password, dependencies);
         response.status(201).json(account);
     };
 
