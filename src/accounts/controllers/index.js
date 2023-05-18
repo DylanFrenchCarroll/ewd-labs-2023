@@ -17,8 +17,14 @@ export default (dependencies) => {
         try {
             const { movieId } = request.body;
             const id = request.params.id;
-            const account = await accountService.addFavourite(id, movieId, dependencies);
-            response.status(200).json(account);
+            try{
+                const account = await accountService.addFavourite(id, movieId, dependencies);
+                response.status(200).json(account);
+            }catch (err ){
+                // response.status(500).json(`Duplicate Favourite ${movieId}`);
+                next(new Error(`Duplicate Favourite ${movieId}`));
+            }
+
         } catch (err) {
             next(new Error(`Invalid Data ${err.message}`));
         }

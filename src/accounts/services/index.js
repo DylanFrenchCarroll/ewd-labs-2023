@@ -16,9 +16,13 @@ getFavourites: async (accountId, { accountsRepository }) => {
 },
 addFavourite: async (accountId, movieId, { accountsRepository }) => {
   const account = await accountsRepository.get(accountId);
-  account.favourites.push(movieId);
-  return await accountsRepository.merge(account);
-
+  if(!account.favourites.includes(movieId)){
+    account.favourites.push(movieId);
+    return await accountsRepository.merge(account);
+  }
+  else {
+    return new Error(`Duplicate Favourite ${movieId}`);
+  }
 },
   registerAccount: async  (firstName, lastName, email, password, {accountsRepository}) => {
     const account = new Account(undefined, firstName, lastName, email, password);
