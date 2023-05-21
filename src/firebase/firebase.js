@@ -27,8 +27,6 @@ export default () => {
             const authHeader = request.headers.authorization;
             // Treatment
             const accessToken = authHeader.split(" ")[1];
-            console.log(accessToken)
-
             const user = await verifyToken(accessToken);
             //output
             next();

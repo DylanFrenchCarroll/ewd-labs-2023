@@ -15,15 +15,29 @@ const createMoviesRouter = (dependencies) => {
             firebaseController.verify(req, res, next);
         });
 
-    router.route('/:id')
-        .get(moviesController.getMovie);
-
     router.route('/')
         .get(moviesController.find);
-    
+        
     router.route('/upcoming')
         .get(moviesController.getUpcomingMovies);
 
+    router.route('/popular')
+        .get(moviesController.getPopularMovies);
+
+    router.route('/:id')
+        .get(moviesController.getMovie);
+
+    router.route('/:id/videos')
+        .get(moviesController.getMovieVideo);
+
+    router.route('/:id/images')
+        .get(moviesController.getMovieImages);
+
+    router.route('/:id/reviews')
+        .get(moviesController.getMovieReviews); 
+
+    router.route('/search')
+        .get(moviesController.searchMovie);
 
     return router;
 };
