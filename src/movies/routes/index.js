@@ -11,7 +11,9 @@ const createMoviesRouter = (dependencies) => {
     const firebaseController = FirebaseController();
 
     router.route('/*')
-        .all(firebaseController.verify());
+        .all( function(req, res, next){
+            firebaseController.verify(req, res, next);
+        });
 
     router.route('/:id')
         .get(moviesController.getMovie);
@@ -19,7 +21,7 @@ const createMoviesRouter = (dependencies) => {
     router.route('/')
         .get(moviesController.find);
     
-    router.route('/')
+    router.route('/upcoming')
         .get(moviesController.getUpcomingMovies);
 
 

@@ -1,18 +1,25 @@
 /* eslint-disable no-unused-vars */
 
-import { admin } from 'firebase-admin';
+import admin  from 'firebase-admin';
 import accountService from "../accounts/services/index.js";
+import { readFile } from 'fs/promises';
 
-var serviceAccount = import("../../serviceAccount.json");
+const serviceAccount = JSON.parse(
+    await readFile(
+      new URL('../../serviceAccount.json', import.meta.url)
+    )
+  );
+console.log("HERE");
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: "https://msc-mobile-dev-default-rtdb.firebaseio.com"
-  });
-
+});
 
 
 export default () => {
+
+
 
     const verify = async (request, response, next) => {
         try { 
@@ -20,6 +27,8 @@ export default () => {
             const authHeader = request.headers.authorization;
             // Treatment
             const accessToken = authHeader.split(" ")[1];
+            console.log(accessToken)
+
             const user = await verifyToken(accessToken);
             //output
             next();
@@ -43,8 +52,3 @@ export default () => {
         verifyToken
     };
 };
-
-
-
-
-
