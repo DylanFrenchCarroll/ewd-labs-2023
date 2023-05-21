@@ -24,11 +24,29 @@ const createRouter = (dependencies) => {
     router.route('/security/token')
         .post(accountsController.authenticateAccount);
 
-    router.route('/:id/favourites')
-        .post(accountsController.addFavourite);
+    router.route('/:id/movieFavourites')
+        .post(accountsController.addMovieFavourite);
         
-    router.route('/:id/favourites')
-        .get(accountsController.getFavourites);
+    router.route('/:id/movieFavourites')
+        .get(accountsController.getMovieFavourites);
+
+    router.route('/:id/showFavourites')
+        .post(accountsController.addShowFavourite);
+        
+    router.route('/:id/showFavourites')
+        .get(accountsController.getShowFavourites);
+
+    router.route('/:id/personFavourites')
+        .post(accountsController.addPersonFavourite);
+        
+    router.route('/:id/personFavourites')
+        .get(accountsController.getPersonFavourites);
+
+    router.route('/:id/mustWatches')
+        .post(accountsController.addMustWatch);
+        
+    router.route('/:id/movieFavourites')
+        .get(accountsController.getMustWatch);
 
     return router;
 };

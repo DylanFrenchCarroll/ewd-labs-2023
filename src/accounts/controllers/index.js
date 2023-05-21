@@ -28,32 +28,6 @@ export default (dependencies) => {
         }
     };
 
-    const addFavourite = async (request, response, next) => {
-        try {
-            const { movieId } = request.body;
-            const id = request.params.id;
-            try{
-                const account = await accountService.addFavourite(id, movieId, dependencies);
-                response.status(200).json(account);
-            }catch (err ){
-                // response.status(500).json(`Duplicate Favourite ${movieId}`);
-                next(new Error(`Duplicate Favourite ${movieId}`));
-            }
-
-        } catch (err) {
-            next(new Error(`Invalid Data ${err.message}`));
-        }
-    };
-    const getFavourites = async (request, response, next) => {
-        try {
-            const id = request.params.id;
-            const favourites = await accountService.getFavourites(id, dependencies);
-            response.status(200).json(favourites);
-        } catch (err) {
-            next(new Error(`Invalid Data ${err.message}`));
-        }
-    };
-
     const createAccount = async (request, response, next) => {
         // Input
         const { firstName, lastName, email, password } = request.body;
@@ -85,14 +59,124 @@ export default (dependencies) => {
         response.status(201).json(account);
     };
 
+    const addMovieFavourite = async (request, response, next) => {
+        try {
+            const { movieId } = request.body;
+            const id = request.params.id;
+            try{
+                const account = await accountService.addMovieFavourite(id, movieId, dependencies);
+                response.status(200).json(account);
+            }catch (err ){
+                // response.status(500).json(`Duplicate Favourite ${movieId}`);
+                next(new Error(`Duplicate Favourite ${movieId}`));
+            }
+
+        } catch (err) {
+            next(new Error(`Invalid Data ${err.message}`));
+        }
+    };
+    const getMovieFavourites = async (request, response, next) => {
+        try {
+            const id = request.params.id;
+            const favourites = await accountService.getMovieFavourites(id, dependencies);
+            response.status(200).json(favourites);
+        } catch (err) {
+            next(new Error(`Invalid Data ${err.message}`));
+        }
+    };
+
+    const addPersonFavourite = async (request, response, next) => {
+        try {
+            const { movieId } = request.body;
+            const id = request.params.id;
+            try{
+                const account = await accountService.addPersonFavourite(id, movieId, dependencies);
+                response.status(200).json(account);
+            }catch (err ){
+                // response.status(500).json(`Duplicate Favourite ${movieId}`);
+                next(new Error(`Duplicate Favourite ${movieId}`));
+            }
+
+        } catch (err) {
+            next(new Error(`Invalid Data ${err.message}`));
+        }
+    };
+    const getPersonFavourites = async (request, response, next) => {
+        try {
+            const id = request.params.id;
+            const favourites = await accountService.getPersonFavourites(id, dependencies);
+            response.status(200).json(favourites);
+        } catch (err) {
+            next(new Error(`Invalid Data ${err.message}`));
+        }
+    };
+
+    const addShowFavourite = async (request, response, next) => {
+        try {
+            const { movieId } = request.body;
+            const id = request.params.id;
+            try{
+                const account = await accountService.addShowFavourite(id, movieId, dependencies);
+                response.status(200).json(account);
+            }catch (err ){
+                // response.status(500).json(`Duplicate Favourite ${movieId}`);
+                next(new Error(`Duplicate Favourite ${movieId}`));
+            }
+
+        } catch (err) {
+            next(new Error(`Invalid Data ${err.message}`));
+        }
+    };
+    const getShowFavourites = async (request, response, next) => {
+        try {
+            const id = request.params.id;
+            const favourites = await accountService.getShowFavourites(id, dependencies);
+            response.status(200).json(favourites);
+        } catch (err) {
+            next(new Error(`Invalid Data ${err.message}`));
+        }
+    };
+
+    const addMustWatch = async (request, response, next) => {
+        try {
+            const { movieId } = request.body;
+            const id = request.params.id;
+            try{
+                const account = await accountService.addMustWatch(id, movieId, dependencies);
+                response.status(200).json(account);
+            }catch (err ){
+                // response.status(500).json(`Duplicate Favourite ${movieId}`);
+                next(new Error(`Duplicate Favourite ${movieId}`));
+            }
+
+        } catch (err) {
+            next(new Error(`Invalid Data ${err.message}`));
+        }
+    };
+    const getMustWatch = async (request, response, next) => {
+        try {
+            const id = request.params.id;
+            const favourites = await accountService.getMustWatch(id, dependencies);
+            response.status(200).json(favourites);
+        } catch (err) {
+            next(new Error(`Invalid Data ${err.message}`));
+        }
+    };
+
     return {
         createAccount,
         getAccount,
         listAccounts,
         updateAccount,
         authenticateAccount,
-        addFavourite,
-        getFavourites,
-        verify 
+        verify,
+        addMovieFavourite,
+        addMustWatch,
+        addPersonFavourite,
+        addShowFavourite,
+        getMovieFavourites,
+        getMustWatch,
+        getPersonFavourites,
+        getShowFavourites
     };
 };

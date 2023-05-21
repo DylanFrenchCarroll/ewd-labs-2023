@@ -19,20 +19,6 @@ export default {
     }
     return user.email;
   },
-  getFavourites: async (accountId, { accountsRepository }) => {
-    const account = await accountsRepository.get(accountId);
-    return account.favourites;
-  },
-  addFavourite: async (accountId, movieId, { accountsRepository }) => {
-    const account = await accountsRepository.get(accountId);
-    if(!account.favourites.includes(movieId)){
-      account.favourites.push(movieId);
-      return await accountsRepository.merge(account);
-    }
-    else {
-      return new Error(`Duplicate Favourite ${movieId}`);
-    }
-  },
   registerAccount: async  (firstName, lastName, email, password, {accountsRepository, authenticator}) => {
     password = await authenticator.encrypt(password);
     const account = new Account(undefined, firstName, lastName, email, password);
@@ -50,5 +36,69 @@ export default {
   updateAccount: (id, firstName, lastName, email, password, {accountsRepository})=>{
     const account = new Account(id, firstName, lastName, email, password);
     return accountsRepository.merge(account);
-   }
+   },
+
+  getMovieFavourites: async (accountId, { accountsRepository }) => {
+    const account = await accountsRepository.get(accountId);
+    return account.movieFavourites;
+  },
+
+  getShowFavourites: async (accountId, { accountsRepository }) => {
+    const account = await accountsRepository.get(accountId);
+    return account.showFavourites;
+  },
+
+  getPersonFavourites: async (accountId, { accountsRepository }) => {
+    const account = await accountsRepository.get(accountId);
+    return account.personFavourites;
+  },
+
+  getMustWatch: async (accountId, { accountsRepository }) => {
+    const account = await accountsRepository.get(accountId);
+    return account.mustWatch;
+  },
+
+  addMovieFavourite: async (accountId, movieId, { accountsRepository }) => {
+    const account = await accountsRepository.get(accountId);
+    if(!account.movieFavourites.includes(movieId)){
+      account.movieFavourites.push(movieId);
+      return await accountsRepository.merge(account);
+    }
+    else {
+      return new Error(`Duplicate Movie Favourite ${movieId}`);
+    }
+  },
+
+  addShowFavourite: async (accountId, showId, { accountsRepository }) => {
+    const account = await accountsRepository.get(accountId);
+    if(!account.showFavourites.includes(showId)){
+      account.showFavourites.push(showId);
+      return await accountsRepository.merge(account);
+    }
+    else {
+      return new Error(`Duplicate Show Favourite ${showId}`);
+    }
+  },
+
+  addPersonFavourite: async (accountId, personId, { accountsRepository }) => {
+    const account = await accountsRepository.get(accountId);
+    if(!account.personFavourites.includes(personId)){
+      account.personFavourites.push(personId);
+      return await accountsRepository.merge(account);
+    }
+    else {
+      return new Error(`Duplicate Person Favourite ${personId}`);
+    }
+  },
+
+  addMustWatch: async (accountId, movieId, { accountsRepository }) => {
+    const account = await accountsRepository.get(accountId);
+    if(!account.mustWatch.includes(movieId)){
+      account.mustWatch.push(movieId);
+      return await accountsRepository.merge(account);
+    }
+    else {
+      return new Error(`Duplicate Must Watch ${movieId}`);
+    }
+  },
 };
