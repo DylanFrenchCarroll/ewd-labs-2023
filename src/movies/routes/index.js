@@ -38,6 +38,8 @@ const createMoviesRouter = (dependencies) => {
 
     router.route('/search')
         .get(moviesController.searchMovie);
+    
+ 
 
     return router;
 };

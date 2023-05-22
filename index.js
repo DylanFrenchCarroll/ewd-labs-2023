@@ -42,7 +42,10 @@ app.use('/api/accounts', createAccountsRouter(dependencies));
 app.use('/api/movies', createMoviesRouter(dependencies));
 app.use('/api/persons', createPersonsRouter(dependencies));
 app.use('/api/shows', createShowsRouter(dependencies));
-
+//The 404 Route (ALWAYS Keep this as the last route)
+app.get('/*', function(req, res){
+	res.status(404).send('what???');
+  });
 app.listen(port, () => {
   console.info(`Server running at ${port}`);
 });

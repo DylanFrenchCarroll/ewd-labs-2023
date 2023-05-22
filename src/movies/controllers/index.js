@@ -61,10 +61,8 @@ export default (dependencies) => {
     const searchMovie = async (request, response, next) => {
         const query = request.query.query;
         logger.log("info", `Searching for ${query}`);
-        console.log(query);
-        response.status(200);
-        // const movies = await moviesService.searchMovie(query, dependencies);
-        // response.status(200).json(movies.results);
+        const movies = await moviesService.searchMovie(query, dependencies);
+        response.status(200).json(movies.results);
     };
 
     return {
