@@ -25,6 +25,8 @@ export default () => {
         try { 
             // Input
             const authHeader = request.headers.authorization;
+            // console.log("#### auth header ### ");
+            // console.log(request.headers.authentication);
             // Treatment
             const accessToken = authHeader.split(" ")[1];
             const user = await verifyToken(accessToken);

@@ -16,30 +16,32 @@ export default (dependencies) => {
     };
     const find = async (request, response, next) => {
         //input
-        const query = request.query;
+        logger.log("info", `Retrieving discover pages `);
+        const page = request.query.page;
         // Treatment
-        const movies = await moviesService.find(query, dependencies);
+        const movies = await moviesService.find(page, dependencies);
         //output
         response.status(200).json(movies);
     };
 
     const getUpcomingMovies = async (request, response, next) => {
         logger.log("info", "Retrieving upcoming movies");
-        const movies = await moviesService.findUpcoming(dependencies);
-        response.status(200).json(movies.results);
+        const page = request.query.page;
+        const movies = await moviesService.findUpcoming(page, dependencies);
+        response.status(200).json(movies);
     };
 
     const getPopularMovies = async (request, response, next) => {
         logger.log("info", "Retrieving popular movies");
         const movies = await moviesService.getPopularMovies(dependencies);
-        response.status(200).json(movies.results);
+        response.status(200).json(movies);
     };
 
     const getMovieVideo = async (request, response, next) => {
         const id = request.params.id;
         logger.log("info", `Retrieving videos for movie ${id}`);
         const movies = await moviesService.getMovieVideo(id, dependencies);
-        response.status(200).json(movies.results);
+        response.status(200).json(movies);
     };
 
     const getMovieImages = async (request, response, next) => {
@@ -53,7 +55,7 @@ export default (dependencies) => {
         const id = request.params.id;
         logger.log("info", `Retrieving reviews for movie ${id}`);
         const movies = await moviesService.getMovieReviews(id, dependencies);
-        response.status(200).json(movies.results);
+        response.status(200).json(movies);
     };
 
     const searchMovie = async (request, response, next) => {

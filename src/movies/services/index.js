@@ -10,20 +10,20 @@ export default {
     },
     find: async (query) => {
         const response = await axios.get(
-            `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.TMDB_KEY}&language=en-US&include_adult=false&include_video=false&${query}`
+            `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${query}`
           );
           return response.data;
     },
-    findUpcoming: async ()=>{
+    findUpcoming: async (query)=>{
       const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.TMDB_KEY}&language=en-US&include_adult=false&include_video=false`
+        `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${query}`
       );
       return response.data;
     },
 
-    getPopularMovies: async ()=>{
+    getPopularMovies: async (query)=>{
       const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.TMDB_KEY}&language=en-US&page=1`
+        `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.TMDB_KEY}&language=en-US&page=${query}`
       );
       return response.data;
     },
