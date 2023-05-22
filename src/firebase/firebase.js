@@ -36,17 +36,37 @@ export default () => {
             }
         };
 
+    const verifyUid = async (request, response, next) => {
+            try { 
+                // Input
+                const authHeader = request.headers.authorization;
+                // Treatment
+                const accessToken = authHeader.split(" ")[1];
+                // console.log("#### - " + accessToken);
+                const user = await verifyToken(accessToken);
+                //output
+                next();
+            }catch(err){
+                //Token Verification Failed
+                next(new Error(`Verification Failed ${err.message}`));
+                }
+            };
+
 
     const verifyToken = async (accessToken) => {
-        const response = await admin.auth().verifyIdToken(accessToken);
+        let token;
+        const response = await admin.auth().verifyIdToken(accessToken).then((decodedToken) => {
+            token = decodedToken.uid;
+        });
         if(response == false) {
             throw new Error('Bad Token');
         }
-        else return true;
+        else return token;
     };
 
     return {
         verify, 
-        verifyToken
+        verifyToken,
+        verifyUid
     };
 };

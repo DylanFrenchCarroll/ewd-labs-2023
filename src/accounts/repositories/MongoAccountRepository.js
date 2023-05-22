@@ -37,7 +37,8 @@ export default class extends AccountRepository {
     }
 
     async get(userId) {
-        const result = await this.model.findById(userId);
+        console.log(userId);
+        const result = await this.model.findOne({firebaseUid: userId});
         const {id, email, firebaseUid, movieFavourites, showFavourites, personFavourites, mustWatch } = result;
         return new Account(id, email, firebaseUid, movieFavourites, showFavourites, personFavourites, mustWatch );
     }

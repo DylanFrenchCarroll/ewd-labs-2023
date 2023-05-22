@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+import { loggers } from "winston";
 import accountService from "../services/index.js";
 
 export default (dependencies) => {
@@ -30,9 +31,9 @@ export default (dependencies) => {
 
     const createAccount = async (request, response, next) => {
         // Input
-        const { firstName, lastName, email, password } = request.body;
+        const { email,  firebaseUid } = request.body;
         // Treatment
-        const account = await accountService.registerAccount(firstName, lastName, email, password, dependencies);
+        const account = await accountService.registerAccount( email, firebaseUid, dependencies);
         //output
         response.status(201).json(account);
     };
@@ -62,8 +63,11 @@ export default (dependencies) => {
     const addMovieFavourite = async (request, response, next) => {
         try {
             const { movieId } = request.body;
+            if(movieId == null ) {
+                next(new Error(`No ID Passed`));
+            }
             const id = request.params.id;
-            try{
+            try{ 
                 const account = await accountService.addMovieFavourite(id, movieId, dependencies);
                 response.status(200).json(account);
             }catch (err ){
@@ -77,7 +81,9 @@ export default (dependencies) => {
     };
     const getMovieFavourites = async (request, response, next) => {
         try {
-            const id = request.params.id;
+            const params = request.params;
+            const id = params.id;
+            console.log(id);
             const favourites = await accountService.getMovieFavourites(id, dependencies);
             response.status(200).json(favourites);
         } catch (err) {

@@ -23,15 +23,15 @@ export default {
                 //delete the existing  collections if in development mode
                 if (process.env.NODE_ENV == "development") {
 
-                    // Get all collections
-                    const collections = await connection.db.listCollections().toArray();
+                    // // Get all collections
+                    // const collections = await connection.db.listCollections().toArray();
 
-                    //delete all collections
-                    collections
-                        .map((collection) => collection.name)
-                        .forEach(async (collectionName) => {
-                            connection.dropCollection(collectionName);
-                        });
+                    // //delete all collections
+                    // collections
+                    //     .map((collection) => collection.name)
+                    //     .forEach(async (collectionName) => {
+                    //         connection.dropCollection(collectionName);
+                    //     });
                 }
             });
         }

@@ -19,11 +19,13 @@ export default {
     }
     return user.email;
   },
-  registerAccount: async  (firstName, lastName, email, password, {accountsRepository, authenticator}) => {
-    password = await authenticator.encrypt(password);
-    const account = new Account(undefined, firstName, lastName, email, password);
+
+  registerAccount: async  (email, firebaseUid, {accountsRepository}) => {
+
+    const account = new Account(undefined, email, firebaseUid);
     return accountsRepository.persist(account);
   },
+  
   getAccount: (accountId, {accountsRepository}) => {
     return accountsRepository.get(accountId);
   },
@@ -39,6 +41,7 @@ export default {
    },
 
   getMovieFavourites: async (accountId, { accountsRepository }) => {
+    console.log("ID");
     const account = await accountsRepository.get(accountId);
     return account.movieFavourites;
   },

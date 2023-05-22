@@ -13,7 +13,7 @@ const createMoviesRouter = (dependencies) => {
     router.route('/*')
         .all( function(req, res, next){
             firebaseController.verify(req, res, next);
-        });
+        }); 
 
     router.route('/')
         .get(moviesController.find);
