@@ -1,6 +1,6 @@
 # Assignment 2 - Web API.
 
-Name: [Your Name]
+Name: Dylan French CArroll
 
 ## Features.
 
@@ -23,13 +23,14 @@ Name: [Your Name]
 [Describe getting/installing the software, perhaps:]
 
 ```cmd
-git clone http:\myrepo.git
+git clone [http:\myrepo.git](https://github.com/DylanFrenchCarroll/ewd-labs-2023.git)
 ```
 
 followed by installation
 
 ```bat
 npm install
+npm start
 ```
 
 
@@ -42,10 +43,11 @@ npm install
 ```bat
 NODE_ENV=development
 PORT=8080
-HOST=
-mongoDB=YourMongoURL
-seedDb=true
-secret=YourJWTSecret
+HOST=localhost
+DATABASE_DIALECT=mongo
+TMDB_KEY="51f6034647383dbsss5b5e48ea4028dfd0d"
+DATABASE_URL=mongodb://localhost:27017/movies_db
+JWT_SECRET_KEY=ilik
 ```
 
 
