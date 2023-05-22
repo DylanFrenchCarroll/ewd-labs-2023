@@ -1,32 +1,27 @@
 # Assignment 2 - Web API.
 
-Name: Dylan French CArroll
+Name: Dylan French Carroll
 
 ## Features.
 
-[A bullet-point list of the ADDITIONAL features/endpoints you have implemented in the API **THAT WERE NOT IN THE LABS** ]. 
+ + Firebase Authentication - Verify ID Tokens to allow access to API
+ + Custom account schema - Contains email, firebase uid and  multiple arrays of favourites/mustwatches
+ + Logging - Used Winston logging to log to console and log file.
+ + Multiple routers to cleanly split code
+ + Rate Limiting - DDOS protection
+ + Helmet - Used helmet to set HTTP headers
+ + Large React Integration
+ 
 
- + Feature 1 - .... a statement of its purpose/objective ..... 
-
- + Feature 2 - .......
-
- + Feature 3 - ......
-
-   e.g.
-
- + Get Similar Movies:  Get a list of similar movies using a movie ID. 
 
 ## Installation Requirements
-
-[Describe how to run the API. If you used a DevContainer/Codespace , you can refer to the relevant files in your repo.]
-
-[Describe getting/installing the software, perhaps:]
+Clone the following repo: 
 
 ```cmd
 git clone [http:\myrepo.git](https://github.com/DylanFrenchCarroll/ewd-labs-2023.git)
 ```
 
-followed by installation
+followed by installation & start
 
 ```bat
 npm install
@@ -37,8 +32,9 @@ npm start
 
 ## API Configuration
 
-[Describe any configuration that needs to take place before running the API. For example, creating an ``.env`` and what variables to put in it. Give an example of how this might be structured/done.]
-[**REMEMBER: DON'T PUT YOUR OWN USERNAMES/PASSWORDS/AUTH KEYS IN THE README OR ON GITHUB,** just placeholders as indicated below:]
+TMDB Key is the API Key.
+PORT/NODE_ENV are configurable. 
+DATABASE_URL is your own Mongo instance
 
 ```bat
 NODE_ENV=development
@@ -51,20 +47,36 @@ JWT_SECRET_KEY=ilik
 ```
 
 
-## API Design
-[Give an overview of your web API design, perhaps similar to the following: ]
+## API Design Routes
+
 
 |  |  GET | POST | PUT | DELETE
 | -- | -- | -- | -- | -- 
-| /api/movies |Gets a list of movies | N/A | N/A |
-| /api/movies/{movieid} | Get a Movie | N/A | N/A | N/A
-| /api/movies/{movieid}/reviews | Get all reviews for movie | Create a new review for Movie | N/A | N/A  
+| /api/movies |Gets discover movies | N/A | N/A | N/A
+| /api/movies/upcoming | Get upcoming movies | N/A | N/A | N/A
+| /api/movies/popular | Get popular movies | N/A | N/A | N/A  
+| /api/movies/{id} | Get specific movie | N/A | N/A | N/A  
+| /api/movies/{id}/videos | Get specific movie video | N/A | N/A | N/A  
+| /api/movies/{id}/images | Get specific movies images | N/A | N/A | N/A  
+| /api/movies/{id}/reviews | Get specific movies reviews | N/A | N/A | N/A  
+| /api/movies/{id}/search | Search for specific movies  | N/A | N/A | N/A  
 | ... | ... | ... | ... | ...
-
-[If you have your API design on an online platform or graphic, please link to it (e.g. [Swaggerhub](https://app.swaggerhub.com/)).]
-https://app.swaggerhub.com/apis-docs/fxwalsh/userAPI/initial
-
-
+| /api/persons/{id} |Gets specific person | N/A | N/A | N/A
+| /api/persons/{id}/images |Gets specific person images | N/A | N/A | N/A
+| /api/persons/popular |Gets popular persons  | N/A | N/A | N/A
+| ... | ... | ... | ... | ...
+| /api/shows/{id} |Gets specific show | N/A | N/A | N/A
+| /api/shows/{id}/images |Gets specific show images | N/A | N/A | N/A
+| /api/shows/popular |Gets popular shows  | N/A | N/A | N/A
+| ... | ... | ... | ... | ...
+| /api/accounts/{id}/movies/favourites |Gets Favourites | Add Favourite | N/A | N/A
+| /api/accounts/{id}/movies/mustWatches |Gets Must Watches | Add to Must Watch | N/A | N/A
+| /api/accounts/{id}/shows/favourites |Gets Favourites | Add Favourite | N/A | N/A
+| /api/accounts/{id}/persons/favourites |Gets Favourites | Add Favourite | N/A | N/A
+| /api/accounts/{id}/movies/favourites |Gets Favourites | Add Favourite | N/A | N/A
+| ... | ... | ... | ... | ...
+| /api/accounts/{id}/ |Gets Account | Update Account | N/A | N/A
+| /api/accounts/ |Gets All Account | Create Account | N/A | N/A
 
 
 ## Security and Authentication
@@ -85,7 +97,7 @@ const accountSchema = Joi.object({
 ## Integrating with React App
 
 React Repo: https://github.com/DylanFrenchCarroll/web-dev-masters
-I changed all of the endpoints in the React Application to go through the API instead of direct calls the TMDB Api. The favourites are also added when the button is clicked so that the MongoDB is also used. 
+I changed all of the endpoints in the React Application to go through the API instead of direct calls the TMDB Api. The favourites are also added when the button is clicked so that the MongoDB is also used e.g. 
 
 ~~~Javascript
 export const getMovieVideo = (args) => {
